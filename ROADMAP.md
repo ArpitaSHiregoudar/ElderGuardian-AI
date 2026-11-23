@@ -1,4 +1,4 @@
-# ElderGuardian AI — Engineering MVP & Product Roadmap
+# ElderGuardian DC — Engineering MVP & Product Roadmap
 
 **Document Version:** 1.0.0  
 **Author:** Senior Engineering Manager  

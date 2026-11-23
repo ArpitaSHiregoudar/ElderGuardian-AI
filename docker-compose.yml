@@ -1,0 +1,34 @@
+services:
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: elderguardian-api
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+      - PORT=5000
+      - JWT_SECRET=elderguardian-development-secret-key-2026
+      - JWT_EXPIRY=15m
+      - JWT_REFRESH_EXPIRY=30d
+      - CORS_ORIGIN=http://localhost:3000
+    volumes:
+      - ./apps/api:/app
+      - /app/node_modules
+      - ./apps/api/data:/app/data
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: elderguardian-web
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+    restart: unless-stopped
